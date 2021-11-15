@@ -12,13 +12,20 @@
 <body>
     <div id="app">
         <h1>THINGS TO DO</h1>
-        <input type="text" placeholder="What I have to do?">
+        <h4 v-if="error">Inserire un testo di almeno 3 caratteri</h4>
+        <input 
+            v-model.trim="todostr"
+            @keyup.enter="insertTodo"
+        type="text" placeholder="What I have to do?">
     
         <ul>
-            <li v-for="{item, index} in todolist">
-                <p>{{item.text}}</p>
+            <li v-for="{item, index} in todoList">
+                <p 
+                @click="toggleDone(index)"
+                :class="{'done': item.done}"
+                >{{item.text}}</p>
                 <i
-                @click="removeItems{index}" 
+                @click="removeTodo{index}" 
                 class="fas fa-trash"></i>
             </li>
           
@@ -28,6 +35,6 @@
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/vue.js"></script>
 </body>
 </html>
